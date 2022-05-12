@@ -1,0 +1,10 @@
+1. Show Billing Modal
+2. Cancel and proceed(/wishlist)
+2.5 Handle Auth
+3. Wishlist Page(Read Only Items, and Address Input with checkout button)
+4. Handle Order Backend with sms.
+5. Header 
+6. Footer
+7. Loading
+8. About Us
+9. Terms & Conditions Page

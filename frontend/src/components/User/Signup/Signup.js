@@ -12,7 +12,7 @@ import {
 import { MdAppRegistration, MdDomainVerification } from "react-icons/md";
 import "./Signup.css";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { signup, clearErrors, clearMessages } from "../../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,6 +20,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, error, message } = useSelector((state) => state.user);
+  const params = new URLSearchParams(useLocation().search).get("next");
   const toast = useToast();
   useEffect(() => {
     if (error) {
@@ -39,7 +40,7 @@ const Signup = () => {
         });
         dispatch(clearMessages());
       }
-      navigate("/");
+      navigate(params ? params : "/");
     }
   }, [dispatch, user, message, error, navigate, toast]);
 
@@ -119,7 +120,7 @@ const Signup = () => {
             >
               Sign Up
             </Button>
-            <Link to="/login">
+            <Link to={`/login?next=${params ? params : "/"}`}>
               <Button leftIcon={<MdDomainVerification />} colorScheme="pink">
                 Already a User?
               </Button>

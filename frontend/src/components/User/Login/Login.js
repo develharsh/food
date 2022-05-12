@@ -12,7 +12,7 @@ import {
 import { MdLogin, MdAccessibilityNew } from "react-icons/md";
 import "./Login.css";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { login, clearErrors, clearMessages } from "../../../actions/user";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,6 +20,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, error, message } = useSelector((state) => state.user);
+  const params = new URLSearchParams(useLocation().search).get("next");
   const toast = useToast();
   useEffect(() => {
     if (error) {
@@ -39,7 +40,7 @@ const Login = () => {
         });
         dispatch(clearMessages());
       }
-      navigate("/");
+      navigate(params ? params : "/");
     }
   }, [dispatch, user, message, error, navigate, toast]);
 
@@ -57,7 +58,7 @@ const Login = () => {
   };
   return (
     <>
-      <Flex className="LoginFlex" mt={[10, 10, 10, 10, 53]}>
+      <Flex className="LoginFlex" mt={[10, 10, 50, 50, 103]}>
         <Box>
           <Image
             w={[300, 300, 400, 500, 500]}
@@ -65,7 +66,7 @@ const Login = () => {
             alt="..."
           />
         </Box>
-        <Box mt={[0, 1, 10, 20, 53]} className="LoginBox">
+        <Box mt={[0, 1, 50, 50, 103]} className="LoginBox">
           <FormControl w={[300, 300, 300, 300, 400]} isRequired>
             <FormLabel htmlFor="s">Your Name</FormLabel>
             <Input type="text" name="ID" value={ID} onChange={handleChange} />
@@ -88,7 +89,7 @@ const Login = () => {
             >
               Log In
             </Button>
-            <Link to="/signup">
+            <Link to={`/signup?next=${params ? params : "/"}`}>
               <Button leftIcon={<MdAccessibilityNew />} colorScheme="pink">
                 New User?
               </Button>

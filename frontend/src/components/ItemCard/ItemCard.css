@@ -1,0 +1,11 @@
+.itemCardMainDiv {
+  box-shadow: 1px 4px 8px rgba(15, 15, 15, 0.76);
+  width: 150px;
+  margin: 5px;
+}
+.itemCardImg {
+  /* border-radius: 50%; */
+  height: 150px;
+  object-fit: cover;
+  margin: 5px;
+}
